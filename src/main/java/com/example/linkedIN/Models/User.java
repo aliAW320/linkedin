@@ -10,8 +10,7 @@ import java.util.List;
 @Entity
 public class User {
 
-    public User() {
-    }
+    public User() {}
     @Id
     private Long id;
     @Column
