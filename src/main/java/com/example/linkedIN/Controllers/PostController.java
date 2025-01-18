@@ -8,9 +8,10 @@ import com.example.linkedIN.Utils.Media;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+//TODO test the add post
 @RestController
 @CrossOrigin
 public class PostController {
@@ -23,6 +24,7 @@ public class PostController {
         this.postDAO = postDAO;
         this.userDAO = userDAO;
     }
+    @PostMapping("post/create")
     public ResponseEntity addPost(@RequestParam String UserEmail ,@RequestParam String DataMedia,
                                   @RequestParam String MediaName , @RequestParam String caption){
         int code = 0;
@@ -33,6 +35,8 @@ public class PostController {
         }
         Post post = new Post(owner , Media.downloadMedia(MediaName , DataMedia) , caption);
         postDAO.save(post);
+        owner.getPosts().add(post);
+        userDAO.save(owner);
         return ResponseEntity.status(200).body("Post added successfully");
     }
 }

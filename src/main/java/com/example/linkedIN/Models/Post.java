@@ -17,6 +17,8 @@ public class Post {
     private String media;
     @Column
     private String caption;
+    @OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     public String getCaption() {
         return caption;
@@ -39,8 +41,6 @@ public class Post {
         this.caption = caption;
     }
 
-    @OneToMany
-    private List<Comment> comments;
 
     public Post(Long id, User owner, String media) {
         Id = id;
