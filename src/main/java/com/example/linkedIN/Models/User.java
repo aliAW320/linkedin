@@ -16,7 +16,7 @@ public class User {
     private Long id;
     @Column
     private String name;
-    @Column(unique = true)
+    @Column(unique = true , nullable = false)
     private String email;
     @Column
     private String password;
@@ -28,6 +28,8 @@ public class User {
     private List<Post> posts;
     @OneToMany
     private List<User> users;
+    @Column(length = 500)
+    private String description;
 
     public User(String name, String email, String password, String phone, String address) {
         this.name = name;
