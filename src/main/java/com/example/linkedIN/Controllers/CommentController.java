@@ -28,7 +28,7 @@ public class CommentController {
     public ResponseEntity addComment(@RequestParam Long postId, @RequestParam String userEmail, @RequestParam String context) {
         Optional<Post> post = postDAO.findById(postId);
         if (post.isPresent()) {
-            User user = userDAO.findByEmail(userEmail);
+            User user =  userDAO.findByEmail(userEmail).get();
             if (user == null) {
                 return ResponseEntity.status(404).body("not valid user");
             }
