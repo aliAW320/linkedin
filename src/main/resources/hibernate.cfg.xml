@@ -10,9 +10,9 @@
         <!-- For Oracle SQL use  org.hibernate.dialect.OracleDialect as the dialect-->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- Example url for reference: dbc:mysql://localhost:3306/project_schema_db?useSSL=false -->
-        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/tweeter?useSSL=false</property>
+        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/linkedin?useSSL=false</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">Alinoroozi84</property>
+        <property name="connection.password">Kasrare556184</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
 

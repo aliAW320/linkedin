@@ -28,7 +28,7 @@ public class PostController {
     public ResponseEntity addPost(@RequestParam String UserEmail ,@RequestParam String DataMedia,
                                   @RequestParam String MediaName , @RequestParam String caption){
         int code = 0;
-        User owner = userDAO.findByEmail(UserEmail);
+        User owner = userDAO.findByEmail(UserEmail).get();
         if(owner == null){
             code = 404;
             return ResponseEntity.status(404).body("User not found");

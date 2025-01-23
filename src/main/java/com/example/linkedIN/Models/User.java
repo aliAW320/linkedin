@@ -1,15 +1,22 @@
 package com.example.linkedIN.Models;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
+@Builder
 @Entity
-public class User {
+@Table(name = "users")
+public class User implements UserDetails {
 
     public User() {}
     @Id
-    private Long id;
+    @GeneratedValue
+    private Integer id;
     @Column
     private String name;
     @Column(unique = true , nullable = false)
@@ -29,6 +36,30 @@ public class User {
     @Column(length = 500)
     private String description;
 
+;
+
+    public User(Integer id,
+                String name,
+                String email,
+                String password,
+                String phone,
+                String address,
+                List<Post> posts,
+                List<User> followers,
+                List<User> following,
+                String description) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
+        this.posts = posts;
+        this.followers = followers;
+        this.following = following;
+        this.description = description;
+    }
+
     public User(String name, String email, String password, String phone, String address) {
         this.name = name;
         this.email = email;
@@ -43,11 +74,11 @@ public class User {
         this.password = password;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,10 +96,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
@@ -121,5 +148,39 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
     }
 }
